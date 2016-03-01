@@ -3,7 +3,7 @@ MAINTAINER Patrice Ferlet <metal3d@gmail.com>
 
 WORKDIR /project
 EXPOSE 4200 49152
-ENV WATCHMAN_VERSION v4.5.0
+ENV HOME /tmp
 
 RUN set -ex;                    \
     npm install -g angular-cli; \
