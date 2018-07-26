@@ -1,92 +1,64 @@
-# docker-ng
+# Angular ng-cli container
 
-Angular 2 client, known as [angular-cli](https://github.com/angular/angular-cli) and providing "ng" command
+Angular client, known as [angular-cli](https://github.com/angular/angular-cli) and providing "ng" command to prepare, develop and serve Angular application.
 
-# Details
+**Important** Angular is not AngularJS !
 
-Image provides exposed port: 4200 (app) and 49152 (livereload).
+## Versions
 
-The default working directory is "/project", so you **should link you workspace to that directory** (see "How to use" section).
+- `6.0.8` `latest` → [latest](/latest/Dockerfile)
 
-The entrypoint is "ng", so you may pass command without invoking "ng".
+## Details
 
-# How to use
+- Exposed port: 4200
+- Volume and working directory: `/app`
 
-You must "bootstrap" a project with "new" command. For example, create a project directory at "`~/testapp`":
+The container will check if `package.json` is present, if it's found so `npm install` is called, either a project is created.
 
-```bash
-mkdir ~/testapp
-cd ~/testapp
-docker run --rm -it     \
-    -u $(id -u):$(id-g) \
-    -v $(pwd):/project metal3d/ng \
-    new myproject
+## Environment
+
+- `APPNAME` is the name of the generated application, default is "hero", it's only used at generation time.
+- `GENERATE` is default to "true", if other value is specified so the container will **not** generate project in case of `package.json` is not found. It is useful when you want to generate application yourself providing others options.
+
+## Usage
+
+Note for SELinux users, you'll need to use "privileged" option or make your application directory usable by Docker with that command:
+
+```
+$ mkdir myapp
+$ chcon -Rt svirt_sandbox_file_t ./myapp 
 ```
 
-Afterward you may launch the default server from command line or using docker-compose. Note that "ng" creates directory named as your project (myproject in our example), **you must link that directory or go to that directory before to continue**.
+Prepare an application:
 
-Command line example:
+```
+$ mkdir myapp
 
-```bash
-docker run --rm -it -u $(id -u):$(id -g) \
-    -v $(pwd)/myproject:/project      \
-    -p 4200:4200 -p 49152:49152 \
-    metal3d/ng serve
+# generate application named "superhero"
+# use "user" option to keep you own uid:gid and be able
+# to write in directory.
+$ docker run --rm -it \
+    -user $(id -u):$(id -g)
+    -e APPNAME=superhero \
+    -v $PWD/myapp:/app
 
-# or go to the project dir
-cd myproject
-docker run --rm -it -u $(id -u):$(id -g) \
-    -v $(pwd):/project      \
-    -p 4200:4200 -p 49152:49152 \
-    metal3d/ng serve
 ```
 
-"`docker-compose.yml`" example file, see the "user" section and the "volumes" that bind "myproject" to "/project":
+Serve:
 
-```yaml
-version: '2':
-services:
-    myproject:
-        image: metal3d/ng
-        command: serve
-        ports:
-        - 4200:4200
-        - 49152:49152
-        user: 1000:1000
-        volumes:
-        - ./myproject:/project
+```
+$ docker run --rm -it \
+    -user $(id -u):$(id -g) \
+    -v $PWD/myapp:/app \
+    -p 4200:4200
 ```
 
-If your "docker-compose.yml" file resides in "myproject" directory:
+To generate a distribution release:
 
-```yaml
-version: '2':
-services:
-    myproject:
-        image: metal3d/ng
-        command: serve
-        ports:
-        - 4200:4200
-        - 49152:49152
-        user: 1000:1000
-        volumes:
-        - ./:/project
 ```
-
-# Generate project files:
-
-Example, create a new component (if you're in "myproject" directory):
-
-```bash
-docker run --rm -it 
-    -v $(pwd):/project   \
-    -u $(id -u):$(id -g) \
-    metal3d/ng g component my-new-component
+$ docker run --rm -it \
+    -user $(id -u):$(id -g) \
+    -v $PWD/myapp:/app \
+    -p 4200:4200 \
+    ng build --prod
 ```
-
-Or use your docker-compose.yml file:
-```bash
-docker-compose run --rm myproject g component my-new-component
-```
-
-
