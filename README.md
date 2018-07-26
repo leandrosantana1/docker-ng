@@ -6,7 +6,7 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 
 ## Versions
 
-- `6.0.8` `latest` → [latest](/latest/Dockerfile)
+- `6` `6.0` `6.0.8` `latest` → [latest](https://github.com/metal3d/docker-ng/tree/master/6.0.8/latest/Dockerfile)
 
 ## Details
 
@@ -35,7 +35,7 @@ Prepare an application:
 $ mkdir myapp
 
 # generate application named "superhero"
-# use "user" option to keep you own uid:gid and be able
+# use "user" option to keep your own uid:gid and be able
 # to write in directory.
 $ docker run --rm -it \
     -user $(id -u):$(id -g)
