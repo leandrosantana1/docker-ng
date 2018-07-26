@@ -15,50 +15,73 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 
 The container will check if `package.json` is present, if it's found so `npm install` is called, either a project is created.
 
+**Important**
+
+You will want to use that image to "develop", so you'll need to have write access on your working directory. That image can work with forced uid:gid, so follow below explanation to set "uid" and "gid". That is useful for Openshift users who want to startup application without to force service account.
+
+You only need to pass "`--user $(id -u):$(id -g)`" option at startup.
+
+
 ## Environment
 
 - `APPNAME` is the name of the generated application, default is "hero", it's only used at generation time.
 - `GENERATE` is default to "true", if other value is specified so the container will **not** generate project in case of `package.json` is not found. It is useful when you want to generate application yourself providing others options.
 
+
 ## Usage
 
 Note for SELinux users, you'll need to use "privileged" option or make your application directory usable by Docker with that command:
 
-```
+```bash
 $ mkdir myapp
 $ chcon -Rt svirt_sandbox_file_t ./myapp 
 ```
 
 Prepare an application:
 
-```
+```bash
 $ mkdir myapp
 
 # generate application named "superhero"
 # use "user" option to keep your own uid:gid and be able
 # to write in directory.
 $ docker run --rm -it \
-    -user $(id -u):$(id -g)
+    --user $(id -u):$(id -g)
     -e APPNAME=superhero \
     -v $PWD/myapp:/app
 
 ```
 
-Serve:
+Serve with binding port 4200:
 
-```
+```bash
 $ docker run --rm -it \
-    -user $(id -u):$(id -g) \
+    --user $(id -u):$(id -g) \
     -v $PWD/myapp:/app \
     -p 4200:4200
 ```
 
 To generate a distribution release:
 
-```
+```bash
 $ docker run --rm -it \
-    -user $(id -u):$(id -g) \
+    --user $(id -u):$(id -g) \
     -v $PWD/myapp:/app \
-    -p 4200:4200 \
     ng build --prod
+```
+
+## Docker-compose example
+
+
+```yaml
+version: "3"
+services:
+    ngapp:
+        image: metal3d/ng:6
+        # use your own
+        user: 1000:1000
+        environment:
+            APPNAME: my-super-app
+        ports:
+            - 4200:4200
 ```
