@@ -2,7 +2,7 @@
 
 if [ -f package.json ]; then
     npm install
-else 
+elif [ "$GENERATE" == "true" ]; then
     ng new $APPNAME --directory . --routing --skip-git
 fi
 
