@@ -5,7 +5,7 @@ LATEST_VERSION=6.0.8
 versions=$(wildcard *.*.*)
 
 all:
-	$(MAKE) -B $(versions)
+	$(MAKE) -B $(sort $(versions))
 
 latest:
 	$(MAKE) $(LATEST_VERSION)
