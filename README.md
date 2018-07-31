@@ -6,7 +6,9 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 
 ## Versions
 
-- `6` `6.0` `6.0.8` `latest` → [latest](https://github.com/metal3d/docker-ng/tree/master/6.0.8/latest/Dockerfile)
+- `6`, `6.1`, `6.1.1`, `latest` → [latest](https://github.com/metal3d/docker-ng/tree/master/6.1.1/Dockerfile)
+- `6.1.0` → [6.1.0](https://github.com/metal3d/docker-ng/tree/master/6.1.0/Dockerfile)
+- `6.0`, `6.0.8` → [6.0.8](https://github.com/metal3d/docker-ng/tree/master/6.0.8/Dockerfile)
 
 ## Details
 
@@ -48,7 +50,8 @@ $ mkdir myapp
 $ docker run --rm -it \
     --user $(id -u):$(id -g)
     -e APPNAME=superhero \
-    -v $PWD/myapp:/app
+    -v $PWD/myapp:/app \
+    metal3d/ng
 
 ```
 
@@ -58,6 +61,7 @@ Serve with binding port 4200:
 $ docker run --rm -it \
     --user $(id -u):$(id -g) \
     -v $PWD/myapp:/app \
+    metal3d/ng \
     -p 4200:4200
 ```
 
@@ -67,6 +71,7 @@ To generate a distribution release:
 $ docker run --rm -it \
     --user $(id -u):$(id -g) \
     -v $PWD/myapp:/app \
+    metal3d/ng \
     ng build --prod
 ```
 
