@@ -3,7 +3,9 @@ FROM node:10-alpine
 RUN apk add --no-cache python git build-base
 
 ENV VERSION 6.1.0
-RUN npm install -g @angular/cli@$VERSION
+RUN set -xe;\
+    npm install -g @angular/cli@$VERSION;\
+    npm cache clean --force;
 
 
 ARG UID=1001
