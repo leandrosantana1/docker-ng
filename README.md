@@ -6,9 +6,11 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 
 ## Versions
 
-- `6`, `6.1`, `6.1.1`, `latest` → [latest](https://github.com/metal3d/docker-ng/tree/master/6.1.1/Dockerfile)
-- `6.1.0` → [6.1.0](https://github.com/metal3d/docker-ng/tree/master/6.1.0/Dockerfile)
-- `6.0`, `6.0.8` → [6.0.8](https://github.com/metal3d/docker-ng/tree/master/6.0.8/Dockerfile)
+See tag tab to see available versions
+
+- `6`, `6.2`, `6.2.x`,`latest` → [latest](https://github.com/metal3d/docker-ng/src)
+- `6.1`, `6.1.x` 
+- `6.0`, `6.0.x`
 
 ## Details
 
