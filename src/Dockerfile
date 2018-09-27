@@ -2,7 +2,7 @@ FROM node:10-alpine
 
 RUN apk add --no-cache python git build-base
 
-ENV VERSION 6.1.0
+ARG VERSION
 RUN set -xe;\
     npm install -g @angular/cli@$VERSION;\
     npm cache clean --force;
