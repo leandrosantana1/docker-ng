@@ -7,11 +7,43 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 ## Versions
 
 See tag tab to see available versions
-- `7`, `7.1`, `7.1.x`, `latest` → [latest](https://github.com/metal3d/docker-ng/src)
-- `7.0`, `7.0.x`
-- `6`, `6.2`, `6.2.x`
-- `6.1`, `6.1.x` 
-- `6.0`, `6.0.x`
+- `7.1.2`, `7.1`, `7`, `latest` → [latest](https://github.com/metal3d/docker-ng/src)
+- `7.1.1`
+- `7.1.0`
+- `7.0.7`, `7.0`
+- `7.0.6`
+- `7.0.5`
+- `7.0.4`
+- `7.0.3`
+- `7.0.2`
+- `7.0.1`
+
+- `6.2.8`, `6.2`, `6`
+- `6.2.7`
+- `6.2.0`
+- `6.2.1`
+- `6.2.2`
+- `6.2.3`
+- `6.2.4`
+- `6.2.5`
+- `6.2.6`
+
+- `6.1.5`, `6.1`
+- `6.1.4`
+- `6.1.3`
+- `6.1.2`
+- `6.1.1`
+- `6.1.0`
+
+- `6.0.8`, `6.0`
+- `6.0.7`
+- `6.0.5`
+- `6.0.4`
+- `6.0.3`
+- `6.0.2`
+- `6.0.1`
+- `6.0.0`
+
 
 ## Details
 
@@ -30,14 +62,10 @@ You only need to pass "`--user $(id -u):$(id -g)`" option at startup.
 
 - `APPNAME` is the name of the generated application, default is "hero", it's only used at generation time.
 - `GENERATE` is default to "true", if other value is specified so the container will **not** generate project in case of `package.json` is not found. It is useful when you want to generate application yourself providing others options.
-
-For version 7.x:
-
 - `ANGULAR_STYLESHEET_FORMAT`: used at install time, one of the supported stylesheet format css, scss, less, lass... (default: css)
 - `ANGULAR_HOST_CHECK`: true or false, default is "true"
 - `ANGULAR_ROUTING`: used at install time to activate routing or not, default "true"
 
-I will soon recompile 6.x version to backport that options.
 
 ## Usage
 
