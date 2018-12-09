@@ -7,7 +7,7 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 ## Versions
 
 See tag tab to see available versions
-- `7.1.2`, `7.1`, `7`, `latest` → [latest](https://github.com/metal3d/docker-ng/src)
+- `7.1.2`, `7.1`, `7`, `latest` → [latest](https://github.com/metal3d/docker-ng/tree/master/src)
 - `7.1.1`
 - `7.1.0`
 - `7.0.7`, `7.0`
