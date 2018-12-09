@@ -34,6 +34,7 @@ ADD entrypoint.sh /entrypoint.sh
 EXPOSE 4200
 USER node
 
+ENV ANGULAR_VERSION=${VERSION} ANGULAR_STYLESHEET_FORMAT=css ANGULAR_ROUTING=true
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 
