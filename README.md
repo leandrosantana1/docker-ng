@@ -7,8 +7,9 @@ Angular client, known as [angular-cli](https://github.com/angular/angular-cli) a
 ## Versions
 
 See tag tab to see available versions
-
-- `6`, `6.2`, `6.2.x`,`latest` → [latest](https://github.com/metal3d/docker-ng/src)
+- `7`, `7.1`, `7.1.x`, `latest` → [latest](https://github.com/metal3d/docker-ng/src)
+- `7.0`, `7.0.x`
+- `6`, `6.2`, `6.2.x`
 - `6.1`, `6.1.x` 
 - `6.0`, `6.0.x`
 
@@ -25,12 +26,18 @@ You will want to use that image to "develop", so you'll need to have write acces
 
 You only need to pass "`--user $(id -u):$(id -g)`" option at startup.
 
-
 ## Environment
 
 - `APPNAME` is the name of the generated application, default is "hero", it's only used at generation time.
 - `GENERATE` is default to "true", if other value is specified so the container will **not** generate project in case of `package.json` is not found. It is useful when you want to generate application yourself providing others options.
 
+For version 7.x:
+
+- `ANGULAR_STYLESHEET_FORMAT`: used at install time, one of the supported stylesheet format css, scss, less, lass... (default: css)
+- `ANGULAR_HOST_CHECK`: true or false, default is "true"
+- `ANGULAR_ROUTING`: used at install time to activate routing or not, default "true"
+
+I will soon recompile 6.x version to backport that options.
 
 ## Usage
 

@@ -1,7 +1,8 @@
 .PHONY=all build latest deploy
 
 REPO=metal3d
-versions=$(shell npm show "@angular/cli@*" version | sed "s/'//g" | awk '/@6/{print $$2}')
+MAJOR=7
+versions=$(shell npm show "@angular/cli@*" version | sed "s/'//g" | awk '/@$(MAJOR)/{print $$2}')
 LATEST_VERSION=$(lastword $(versions))
 
 all:
@@ -21,3 +22,7 @@ latest:
 
 deploy:
 	docker push $(REPO)/ng
+
+check:
+	@echo node versions $(sort $(versions))
+	@echo latest echo $(LATEST_VERSION)
