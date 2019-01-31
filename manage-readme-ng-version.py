@@ -1,36 +1,35 @@
-import docker
+import subprocess
 
-cli = docker.from_env()
+images = subprocess.Popen(
+        ["docker", "images", "metal3d/ng",
+            "--format", "{{ .Tag }} {{ .ID }} {{ .Repository }}"],
+        stdout=subprocess.PIPE)
+sort = subprocess.Popen(
+        ["sort", "-V"],
+        stdin=images.stdout,
+        stdout=subprocess.PIPE)
 
-images = cli.images.list(name="metal3d")
+images.stdout.close()
+versions = sort.communicate()[0].decode().strip().split('\n')
+versions.sort(reverse=True)
 
-tags = []
-for i in images:
-    rtags = []
-    for rt in i.attrs['RepoTags']:
-        if 'docker.io' in rt:
-            continue
-        if 'metal3d/ng:' not in rt:
-            continue
-        tag = rt.split(':')[1]
-        rtags.append(tag)
+releases = {}
+for v in versions:
+    version, imid, repo = v.split(' ')
+    if 'docker.io' in repo:
+        continue
 
-    if len(rtags) > 0:
-        rtags.sort()
-        tags.append(rtags)
+    if imid not in releases:
+        releases[imid] = []
 
-tags.sort()
-for t in tags:
-    t.sort(reverse=True)
-    listing = []
-    islatest = False
-    for tag in t:
-        if tag == 'latest':
-            islatest = True
-            continue
-        listing.append(tag)
-    if islatest:
-        listing.append('latest')
+    releases[imid].append(version)
 
-    out = ['`%s`' % l for l in listing]
-    print("- " + ", ".join(out))
+for idx, (_, versions) in enumerate(releases.items()):
+    versions = list(reversed(versions))
+
+    end = ''
+    if len(versions) > 1:
+        end = '\n'
+
+    print(end + '- ' + ' -> '.join(versions))
+

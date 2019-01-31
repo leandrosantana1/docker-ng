@@ -1,5 +1,7 @@
 #!/bin/sh
 
+eval $(fixuid)
+
 if [ -f package.json ]; then
     npm install
 elif [ "$GENERATE" == "true" ]; then
