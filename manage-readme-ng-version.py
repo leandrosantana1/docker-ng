@@ -32,4 +32,3 @@ for idx, (_, versions) in enumerate(releases.items()):
         end = '\n'
 
     print(end + '- ' + ' -> '.join(versions))
-
