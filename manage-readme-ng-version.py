@@ -26,9 +26,17 @@ for v in versions:
 
 for idx, (_, versions) in enumerate(releases.items()):
     versions = list(reversed(versions))
+    versions = ['`%s`' % v for v in versions if v != '<none>']
+
+    if len(versions) == 0:
+        continue
 
     end = ''
     if len(versions) > 1:
         end = '\n'
+
+    if idx == 0:
+        versions[-1] = '[latest](https://github.com/metal3d' + \
+                       '/docker-ng/blob/master/src/Dockerfile)'
 
     print(end + '- ' + ' -> '.join(versions))

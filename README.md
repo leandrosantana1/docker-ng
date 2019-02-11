@@ -15,54 +15,56 @@ This image is based on "node:10-alpine" image to limitate size and reduce depend
 
 You can use that tags to get corresponding Angular version.
 
-- 7 -> 7.3 -> 7.3.0 -> [latest](https://github.com/metal3d/docker-ng/blob/master/src/Dockerfile)
+- `7` -> `7.3` -> `7.3.1` -> [latest](https://github.com/metal3d/docker-ng/blob/master/src/Dockerfile)
+- `7.3.0`
 
-- 7.2 -> 7.2.4
-- 7.2.3
-- 7.2.2
-- 7.2.1
-- 7.2.0
+- `7.2` -> `7.2.4`
+- `7.2.3`
+- `7.2.2`
+- `7.2.1`
+- `7.2.0`
 
-- 7.1 -> 7.1.4
-- 7.1.3
-- 7.1.2
-- 7.1.1
-- 7.1.0
+- `7.1` -> `7.1.4`
+- `7.1.3`
+- `7.1.2`
+- `7.1.1`
+- `7.1.0`
 
-- 7.0 -> 7.0.7
-- 7.0.6
-- 7.0.5
-- 7.0.4
-- 7.0.3
-- 7.0.2
-- 7.0.1
+- `7.0` -> `7.0.7`
+- `7.0.6`
+- `7.0.5`
+- `7.0.4`
+- `7.0.3`
+- `7.0.2`
+- `7.0.1`
 
-- 6 -> 6.2 -> 6.2.9
-- 6.2.8
-- 6.2.7
-- 6.2.6
-- 6.2.5
-- 6.2.4
-- 6.2.3
-- 6.2.2
-- 6.2.1
-- 6.2.0
+- `6` -> `6.2` -> `6.2.9`
+- `6.2.8`
+- `6.2.7`
+- `6.2.6`
+- `6.2.5`
+- `6.2.4`
+- `6.2.3`
+- `6.2.2`
+- `6.2.1`
+- `6.2.0`
 
-- 6.1 -> 6.1.5
-- 6.1.4
-- 6.1.3
-- 6.1.2
-- 6.1.1
-- 6.1.0
+- `6.1` -> `6.1.5`
+- `6.1.4`
+- `6.1.3`
+- `6.1.2`
+- `6.1.1`
+- `6.1.0`
 
-- 6.0 -> 6.0.8
-- 6.0.7
-- 6.0.5
-- 6.0.4
-- 6.0.3
-- 6.0.2
-- 6.0.1
-- 6.0.0
+- `6.0` -> `6.0.8`
+- `6.0.7`
+- `6.0.5`
+- `6.0.4`
+- `6.0.3`
+- `6.0.2`
+- `6.0.1`
+- `6.0.0`
+
 
 ## Details
 
@@ -139,6 +141,7 @@ $ docker run --rm -it \
     --user $(id -u):$(id -g)
     -e APPNAME=superhero \
     -v $PWD/myapp:/app \
+    -p 4200:4200 \
     metal3d/ng
 
 ```
@@ -172,7 +175,7 @@ services:
     ngapp:
         image: metal3d/ng:latest
         # use your own
-        user: 1000:1000
+        user: ${UID}:${GID}
         environment:
             APPNAME: my-super-app
         ports:
@@ -182,6 +185,26 @@ services:
             # use docker-compose up, and use :Z flag
             # on SELinux enabled distributions.
             - ./myapp:/app:Z
+```
+
+You need `UID` and `GID` environment variable. `UID` should be already set but you can export your `GID` in your `~/.bashrc` file:
+
+```
+# Do it only once
+echo 'export GID=$(id -g)' >> ~/.bashrc
+
+# Reload...
+. ~/.bashrc
+
+# launch
+docker-compose up
+```
+
+Or directly use it in your shell:
+
+```bash
+export GID=$(id -g)
+docker-compose up
 ```
 
 # Information about build
