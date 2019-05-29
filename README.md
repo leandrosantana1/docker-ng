@@ -15,7 +15,15 @@ This image is based on "node:10-alpine" image to limitate size and reduce depend
 
 You can use that tags to get corresponding Angular version.
 
-- `7` -> `7.3` -> `7.3.1` -> [latest](https://github.com/metal3d/docker-ng/blob/master/src/Dockerfile)
+- `7` -> `7.3` -> `7.3.9` [latest](https://github.com/metal3d/docker-ng/blob/master/src/Dockerfile)
+- `7.3.8`
+- `7.3.7`
+- `7.3.6`
+- `7.3.5`
+- `7.3.4`
+- `7.3.3`
+- `7.3.2`
+- `7.3.1`
 - `7.3.0`
 
 - `7.2` -> `7.2.4`
@@ -64,7 +72,7 @@ You can use that tags to get corresponding Angular version.
 - `6.0.2`
 - `6.0.1`
 - `6.0.0`
-
+- `6`
 
 ## Details
 
