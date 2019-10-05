@@ -32,4 +32,4 @@ for v in versions:
     releases[imid].append(version)
 
 for _, v in releases.items():
-    print('- ' + (' -> '.join(v)))
+    print(u'- ' + (u' ⇨ '.join(v)))
